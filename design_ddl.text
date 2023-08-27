@@ -1,0 +1,103 @@
+create or replace table banner
+(
+	id bigint auto_increment
+		primary key,
+	banner_image varchar(255) null,
+	banner_name varchar(255) null,
+	description varchar(255) null
+);
+
+create or replace index IDX16168xskf6ed0yi2jwm9fi24l
+	on banner (id);
+
+create or replace index IDXbqor1385noyqf8mb3959o8jt4
+	on banner (banner_name);
+
+create or replace index IDXe0ew92n3hbc6u59lydw26wyas
+	on banner (description);
+
+create or replace index IDXrgcjx5bqswlb6bykn5jt22wv6
+	on banner (banner_image);
+
+create or replace table service
+(
+	id bigint auto_increment
+		primary key,
+	service_code varchar(255) null,
+	service_icon varchar(255) null,
+	service_name varchar(255) null,
+	service_tariff bigint null
+);
+
+create or replace index IDX2l8bfiqonps9wa1n7b7aacg53
+	on service (service_icon);
+
+create or replace index IDX6xwq58ocy1uly2puvg4jnrats
+	on service (service_name);
+
+create or replace index IDXdb5a0x1clnb2n5akdp6sa72wx
+	on service (service_code);
+
+create or replace index IDXlhppwbb9l0g76idwnaapex4ya
+	on service (id);
+
+create or replace index IDXr2vwglfkpww3e0i9orgvs2kd5
+	on service (service_tariff);
+
+create or replace table user
+(
+	email varchar(255) not null
+		primary key,
+	first_name varchar(255) null,
+	last_name varchar(255) null,
+	password varchar(255) null
+);
+
+create or replace table user_balance
+(
+	email varchar(255) null,
+	balance bigint null,
+	id bigint auto_increment
+		primary key,
+	constraint FKjn4y0fm69f0lhsrt5gy1uq1dh
+		foreign key (email) references user (email)
+);
+
+create or replace table user_profile
+(
+	email varchar(255) not null
+		primary key,
+	picture_link longtext null
+);
+
+create or replace table user_transaction
+(
+	invoice_number bigint auto_increment
+		primary key,
+	service_code varchar(255) null,
+	service_name varchar(255) null,
+	total_amount bigint null,
+	email varchar(255) null,
+	created_on varchar(255) null,
+	transaction_type varchar(255) null,
+	constraint FKqbkf07tw05xa3iavaloqsky92
+		foreign key (email) references user (email)
+);
+
+create or replace index IDX8kqxogxmu1o83xvotmjw1167e
+	on user_transaction (created_on);
+
+create or replace index IDX9fijfuvgb2bbexppdsi60ummo
+	on user_transaction (transaction_type);
+
+create or replace index IDXhwlerx07831779iifv79vbdym
+	on user_transaction (total_amount);
+
+create or replace index IDXrvnt5ohgq11ui4dt3b4n6lshx
+	on user_transaction (service_code);
+
+create or replace index IDXs0ktryc9x7yunyq71oulo6xs1
+	on user_transaction (invoice_number);
+
+create or replace index IDXso13uivtl9jdxjy66oxkur92t
+	on user_transaction (service_name);
